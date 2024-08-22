@@ -19,9 +19,13 @@ export class FetchApiDataService {
   }
 
   private getHttpOptions() {
+    const token = this.getToken();
+    if (!token) {
+      console.error('Token not found in localStorage');
+    }
     return {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${this.getToken()}`
+        Authorization: `Bearer ${token}`
       })
     };
   }
@@ -34,6 +38,7 @@ export class FetchApiDataService {
     );
   }
 
+  
   public userLogin(loginData: any): Observable<any> {
     const { Username, Password } = loginData;
     const url = `${this.apiUrl}/login?Username=${encodeURIComponent(Username)}&Password=${encodeURIComponent(Password)}`;
@@ -52,15 +57,15 @@ export class FetchApiDataService {
     );
 }
 
-  public getOneMovie(movieId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}movies/${movieId}`, 
+  public getOneMovie(movieid: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movies/${movieid}`, 
       this.getHttpOptions()).pipe(
   catchError(this.handleError)
     );
 }
 
   public getMovie(movieId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}movies/${movieId}`,
+    return this.http.get(`${this.apiUrl}/movies/${movieId}`,
       this.getHttpOptions()).pipe(
         catchError(this.handleError)
       );
@@ -81,39 +86,80 @@ export class FetchApiDataService {
   }
 
   public getUser(username: string): Observable<any>{
-    return this.http.get(`${this.apiUrl}users/${username}`,
+    return this.http.get(`${this.apiUrl}/User/${username}`,
       this.getHttpOptions()).pipe(
         catchError(this.handleError)
       );
   }
 
-  public getFavoriteMovies(username: string): Observable<any>{
-    return this.http.get(`${this.apiUrl}users/${username}/movies`,
-      this.getHttpOptions()).pipe(
-        catchError(this.handleError)
-      );
-  }
+  public getFavoriteMovies(username: string): Observable<any> {
+  return this.http.get(`${this.apiUrl}/user/${username}/favorites`);
+}
 
   public addFavoriteMovie(username: string, movieId: string): Observable<any>{
-    return this.http.post(`${this.apiUrl}users/${username}/movies/${movieId}`, {},
-      this.getHttpOptions()).pipe(
-      catchError(this.handleError)
-    ); 
-  }
-
-  public editUser(username: string, userDetails: any): Observable<any>{
-    return this.http.put(`${this.apiUrl}users/${username}`, userDetails,
-      this.getHttpOptions()).pipe(
+    return this.http.put(`${this.apiUrl}/user/${username}/movies/${movieId}`, {},{
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      })
+    });
+    }
+    
+    // Edit user profile
+    public editUser(username: string, updatedData: any): Observable<any> {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token not found in localStorage');
+        return throwError('Token not found');
+      }
+    
+      return this.http.put(`${this.apiUrl}/User/${username}`, JSON.stringify(updatedData), {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }),
+      }).pipe(
         catchError(this.handleError)
-      ); 
-  }
+      );
+    }
 
-  public deleteUser(username: string): Observable<any>{
-    return this.http.delete(`${this.apiUrl}users/${username}`,
-      this.getHttpOptions()).pipe(
+
+   public updateUserProfile(username: string, userData: any): Observable<any> {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token not found in localStorage');
+        return throwError('Token not found');
+      }
+    
+      return this.http.put(`${this.apiUrl}/User/${username}`, JSON.stringify(userData), {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }),
+      }).pipe(
         catchError(this.handleError)
-      ); 
-  }
+      );
+    }
+
+    public deleteUser(username: string): Observable<any> {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token not found in localStorage');
+        return throwError('Token not found');
+      }
+  
+      console.log('Deleting user with username:', username);
+      return this.http.delete(`${this.apiUrl}/User/${username}`, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        }),
+      }).pipe(
+        map((response: any) => {
+          console.log('User deleted response:', response);
+          return response;
+        }),
+        catchError(this.handleError)
+      );
+    }
 
   public deleteFavoriteMovie(username: string, movieId: string): Observable<any>{
     return this.http.delete(`${this.apiUrl}users/${username}/movies/${movieId}`,

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Edit Profile</h2>
+<form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="Username">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="Password">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="Email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Birthday</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="Birthday">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="editProfileForm.invalid">Save</button>
+  </div>
+</form>

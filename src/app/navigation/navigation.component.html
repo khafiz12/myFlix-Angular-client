@@ -1,0 +1,5 @@
+<nav *ngIf="showNavigation">
+    <button mat-button [routerLink]="['/movies']">Movies</button>
+    <button mat-button (click)="goToUserProfile()">Profile</button>
+    <button mat-button (click)="logout()">Logout</button>
+  </nav>

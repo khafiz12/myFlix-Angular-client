@@ -1,0 +1,39 @@
+<app-navigation [showNavigation]="true"></app-navigation>
+
+<div class="profile-container">
+  <h2>Your Profile</h2>
+
+  <div *ngIf="user" class="user-info">
+    <p><strong>Username:</strong> {{ user.Username }}</p>
+    <p><strong>Email:</strong> {{ user.Email }}</p>
+    <p><strong>Password:</strong> {{ user.Password }}</p>
+    <p><strong>Birthday:</strong> {{ user.Birthday | date }}</p>
+  </div>
+  <div *ngIf="!user" class="loading">
+    <p>Loading user data...</p>
+  </div>
+
+  <h2>Your Favorite Movies</h2>
+
+  <div *ngIf="userFavoriteMovies.length > 0; else noFavorites" class="favorite-movies">
+    <mat-card *ngFor="let movie of userFavoriteMovies" class="movie-card">
+      <mat-card-header *ngIf="movie">
+        <mat-card-title>{{ movie?.title }}</mat-card-title>
+        <mat-card-subtitle *ngIf="movie.director">Directed by: {{ movie?.director?.name }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image *ngIf="movie?.imageurl" [src]="movie?.imageurl" alt="{{ movie?.title }}">
+      <mat-card-content *ngIf="movie?.description">
+        <p>{{ movie?.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <ng-template #noFavorites class="favorites">
+    <p>You have no favorite movies yet.</p>
+  </ng-template>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="openEditProfileDialog()">Edit Profile</button>
+    <button mat-raised-button color="warn" (click)="deregisterAccount()">Deregister Account</button>
+  </div>
+</div>

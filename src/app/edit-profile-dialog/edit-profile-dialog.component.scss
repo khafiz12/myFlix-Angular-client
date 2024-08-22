@@ -1,0 +1,109 @@
+// Define your color palette
+$primary-color: #3498db; // Light Blue
+$secondary-color: #2c3e50; // Dark Blue/Grey
+$text-color: #2c3e50; // Dark Grey for text
+$background-color: #ffffff; // White for background
+$button-color: #3498db; // Button color
+
+$font-family-base: 'Roboto', sans-serif;
+
+// Responsive breakpoints
+$breakpoint-mobile: 600px;
+$breakpoint-tablet: 768px;
+
+// Global styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-base;
+}
+
+body {
+  background-color: $secondary-color;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+h2 {
+  font-size: 1.8em;
+  color: $primary-color;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  background-color: $background-color; // White background for form
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 15px;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 10px;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+
+  mat-label {
+    color: $text-color; // Dark Grey for label text
+  }
+
+  mat-input-element {
+    color: $text-color; // Dark Grey for input text
+  }
+
+  .mat-form-field-appearance-fill {
+    .mat-form-field-outline {
+      color: $secondary-color; // Dark Grey for the outline of the input fields
+    }
+  }
+}
+
+button {
+  &.mat-button {
+    color: #ffffff;
+    background-color: $button-color;
+    margin-right: 10px;
+
+    &:hover {
+      background-color: darken($button-color, 10%);
+    }
+  }
+
+  &.mat-dialog-close {
+    color: $secondary-color; // Dark Grey for cancel button
+    background-color: lighten($secondary-color, 40%);
+
+    &:hover {
+      background-color: lighten($secondary-color, 30%);
+    }
+  }
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    align-items: stretch;
+
+    button {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

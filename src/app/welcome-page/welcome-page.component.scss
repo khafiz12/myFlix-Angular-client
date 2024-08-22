@@ -1,0 +1,51 @@
+.main-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height of the viewport */
+    background-color: #f0f0f0; /* Light background for contrast */
+  }
+  
+  .welcome-container {
+    text-align: center;
+    background-color: #ffffff; /* White background for content */
+    padding: 2rem;
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  
+  .welcome-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #3f51b5; /* Primary color */
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Space between buttons */
+  }
+  
+  .action-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  @media (max-width: 600px) {
+    .welcome-container {
+      width: 90%;
+      padding: 1rem;
+    }
+  
+    .welcome-title {
+      font-size: 2rem;
+    }
+  
+    .action-button {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.875rem;
+    }
+  }
