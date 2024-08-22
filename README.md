@@ -5,7 +5,7 @@
 ## Project Overview
 
 - **Title**: MyFlix Angular Client
-- **Description**: A movie management app where users can view, favorite, and manage movies and their profiles. Built with Angular/TypeScript and styled with modules.
+- **Description**: A movie management app where users can view, favorite, and manage movies and their profiles. Built with Angular/TypeScript and styled with Angular Materials.
 
 ## Technologies Used
 
