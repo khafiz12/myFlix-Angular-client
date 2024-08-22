@@ -5,7 +5,10 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 /**
  * Component for editing user profile details in a dialog.
- * Provides a form for updating user information including username, email, birthday, and optional password.
+ * This component provides a form for updating user information including username, email, birthday, and optional password.
+ * 
+ * @example
+ * <app-edit-profile-dialog [data]="userData"></app-edit-profile-dialog>
  */
 @Component({
   selector: 'app-edit-profile-dialog',
@@ -16,19 +19,21 @@ export class EditProfileDialogComponent implements OnInit {
 
   /**
    * Form group for editing the profile.
+   * Includes form controls for Username, Email, Birthday, and an optional Password.
    */
   editProfileForm: FormGroup;
 
   /**
    * Creates an instance of EditProfileDialogComponent.
-   * @param dialogRef The MatDialogRef for controlling the dialog.
-   * @param data The user data injected into the dialog.
-   * @param formBuilder The FormBuilder service for creating the form.
-   * @param fetchApiData The service for API data fetching.
+   * 
+   * @param dialogRef The MatDialogRef for controlling the dialog. Provides methods to close the dialog.
+   * @param data The user data injected into the dialog. This should include Username, Email, Birthday, and optionally, Password.
+   * @param formBuilder The FormBuilder service for creating and managing the form.
+   * @param fetchApiData The service for API data fetching and updating user profile data.
    */
   constructor(
     public dialogRef: MatDialogRef<EditProfileDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { Username: string, Email: string, Birthday: string, Password?: string },
     private formBuilder: FormBuilder,
     private fetchApiData: FetchApiDataService
   ) {
@@ -41,15 +46,17 @@ export class EditProfileDialogComponent implements OnInit {
   }
 
   /**
-   * Initializes the component. Currently no specific initialization required.
+   * Initializes the component. Currently no specific initialization is required beyond form setup.
    */
   ngOnInit(): void {}
 
   /**
-   * Submits the form data to update the user profile.
-   * Constructs the updated data object, including the password only if provided.
-   * Closes the dialog and logs a success message upon successful update.
-   * Logs an error message if the update fails.
+   * Handles form submission to update the user profile.
+   * Constructs the updated data object with the provided form values. Includes the Password only if it is provided by the user.
+   * Sends the update request through the FetchApiDataService. On success, closes the dialog and logs the success message.
+   * On failure, logs an error message to the console.
+   * 
+   * @memberof EditProfileDialogComponent
    */
   onSubmit(): void {
     // Define updatedData with optional Password property
