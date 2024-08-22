@@ -1,6 +1,32 @@
 # MyFlixAngularClient
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
+# MyFlix Angular Client
+
+**MyFlix Angular Client** is an Angular application that allows users to browse a list of movies, add movies to their favorite list, view detailed movie information, and manage their user profiles. The app also supports deregistration and profile editing.
+
+## Project Overview
+
+- **Title**: MyFlix Angular Client
+- **Description**: A movie management app where users can view, favorite, and manage movies and their profiles. Built with Angular/TypeScript and styled with modules.
+
+## Technologies Used
+
+- **Angular**: Framework for building the web application.
+- **TypeScript**: Superset of JavaScript for static type checking.
+- **Angular Material**: UI component library for Angular.
+- **REST API**: For fetching data from the server.
+- **Database**: For storing user and movie data.
+- **Kanban**: Agile methodology used for project management.
+- **TypeDoc**: Documentation generator for TypeScript projects.
+- **JSDoc**: Documentation generator for JavaScript code.
+  
+## Usage Instructions
+
+- **View Movies**: Navigate to the main page to see a list of 10 movies.
+- **Add to Favorites**: Click on the favorite icon on the movie card to add a movie to your favorite list.
+- **View Details**: Click on a movie card to see details, director's bio, and more.
+- **Manage Profile**: Access and edit your profile from the user profile page.
+- **Deregister**: Choose to deregister from the user profile page.
 
 ## Development server
 
