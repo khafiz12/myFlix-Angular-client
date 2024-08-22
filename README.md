@@ -1,5 +1,3 @@
-# MyFlixAngularClient
-
 # MyFlix Angular Client
 
 **MyFlix Angular Client** is an Angular application that allows users to browse a list of movies, add movies to their favorite list, view detailed movie information, and manage their user profiles. The app also supports deregistration and profile editing.
