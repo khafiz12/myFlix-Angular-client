@@ -142,7 +142,7 @@ export class MovieCardComponent implements OnInit {
     let user: any;
 
     try {
-      const storedUser = localStorage.getItem('user');
+      const storedUser = localStorage.getItem('User');
       if (storedUser) {
         user = JSON.parse(storedUser);
       } else {
@@ -165,7 +165,7 @@ export class MovieCardComponent implements OnInit {
         
         // Update user data in localStorage
         user.Favoritemovies = response.Favoritemovies;
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('User', JSON.stringify(user));
       },
       (error: any) => {
         console.error('Error adding movie to favorites:', error);

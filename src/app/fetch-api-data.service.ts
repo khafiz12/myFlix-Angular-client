@@ -57,8 +57,8 @@ export class FetchApiDataService {
     );
 }
 
-  public getOneMovie(movieid: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/movies/${movieid}`, 
+  public getOneMovie(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movies/${movieId}`, 
       this.getHttpOptions()).pipe(
   catchError(this.handleError)
     );
@@ -93,11 +93,11 @@ export class FetchApiDataService {
   }
 
   public getFavoriteMovies(username: string): Observable<any> {
-  return this.http.get(`${this.apiUrl}/user/${username}/favorites`);
+  return this.http.get(`${this.apiUrl}/User/${username}`);
 }
 
-  public addFavoriteMovie(username: string, movieId: string): Observable<any>{
-    return this.http.put(`${this.apiUrl}/user/${username}/movies/${movieId}`, {},{
+  public addFavoriteMovie(username: string, MovieID: string): Observable<any>{
+    return this.http.put(`${this.apiUrl}/User/${username}/movies/${MovieID}`, {},{
       headers: new HttpHeaders({
         Authorization: `Bearer ${localStorage.getItem('token')}`
       })
