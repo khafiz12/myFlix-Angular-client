@@ -57,8 +57,8 @@ export class FetchApiDataService {
     );
 }
 
-  public getOneMovie(movieId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/movies/${movieId}`, 
+  public getOneMovie(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movies/id/${id}`, 
       this.getHttpOptions()).pipe(
   catchError(this.handleError)
     );
