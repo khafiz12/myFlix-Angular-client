@@ -103,6 +103,14 @@ export class FetchApiDataService {
       })
     });
     }
+
+    public getMovieById(MovieID: string): Observable<any> {
+      return this.http.get(`${this.apiUrl}/movies/id/${MovieID}`, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        })
+      });
+    }
     
     // Edit user profile
     public editUser(username: string, updatedData: any): Observable<any> {
