@@ -103,7 +103,8 @@ export class FetchApiDataService {
       })
     });
     }
-
+    
+// Add a movie using its ID
     public getMovieById(MovieID: string): Observable<any> {
       return this.http.get(`${this.apiUrl}/movies/id/${MovieID}`, {
         headers: new HttpHeaders({
