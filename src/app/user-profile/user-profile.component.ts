@@ -90,11 +90,15 @@ export class UserProfileComponent implements OnInit {
    * Populates the `userFavoriteMovies` array with movie details fetched from the backend.
    */
   getFavoriteMovies(): void {
-    const movieIds = this.user.Favoritemovies; // Ensure that Favoritemovies matches your API naming convention
+    let movieIds = this.user.Favoritemovies; // Ensure that Favoritemovies matches your API naming convention
     
     if (movieIds && movieIds.length > 0) {
+      // Remove duplicates from movieIds using Set
+      movieIds = Array.from(new Set(movieIds));
+  
       this.userFavoriteMovies = [];
       console.log('Fetching favorite movies', movieIds);
+      
       movieIds.forEach((movieId: string) => {
         this.fetchApiData.getMovieById(movieId).subscribe(
           (movie) => {
