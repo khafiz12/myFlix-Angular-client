@@ -19,7 +19,7 @@
     <mat-card *ngFor="let movie of userFavoriteMovies" class="movie-card">
       <mat-card-header *ngIf="movie">
         <mat-card-title>{{ movie?.title }}</mat-card-title>
-        <mat-card-subtitle *ngIf="movie.director">Directed by: {{ movie?.director?.name }}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="movie.director">Directed by: {{ movie.director?.name }}</mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image *ngIf="movie?.imageurl" [src]="movie?.imageurl" alt="{{ movie?.title }}">
       <mat-card-content *ngIf="movie?.description">

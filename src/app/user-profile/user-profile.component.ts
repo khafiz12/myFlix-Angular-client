@@ -90,17 +90,21 @@ export class UserProfileComponent implements OnInit {
    * Populates the `userFavoriteMovies` array with movie details fetched from the backend.
    */
   getFavoriteMovies(): void {
-    const movieIds = this.user.Favoritemovies;
+    let movieIds = this.user.Favoritemovies; // Ensure that Favoritemovies matches your API naming convention
     
     if (movieIds && movieIds.length > 0) {
+      // Remove duplicates from movieIds using Set
+      movieIds = Array.from(new Set(movieIds));
+  
       this.userFavoriteMovies = [];
-      console.log('Fetching favorite movies', movieIds)
+      console.log('Fetching favorite movies', movieIds);
+      
       movieIds.forEach((movieId: string) => {
-        this.fetchApiData.getOneMovie(movieId).subscribe(
+        this.fetchApiData.getMovieById(movieId).subscribe(
           (movie) => {
             console.log('Fetched movie:', movie); // Check what data is being logged
             if (movie) {
-              this.userFavoriteMovies.push(movie);
+              this.userFavoriteMovies.push(movie); // Push detailed movie data
               console.log('Updated favorite movies array', this.userFavoriteMovies);
             } else {
               console.error(`Movie with ID ${movieId} not found.`);
@@ -115,7 +119,6 @@ export class UserProfileComponent implements OnInit {
       console.log('No favorite movies found.');
     }
   }
-
   /**
    * Opens the Edit Profile dialog where the user can update their profile information.
    * After the dialog is closed, updates the user profile with the new data.
